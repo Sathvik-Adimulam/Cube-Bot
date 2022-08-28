@@ -13,7 +13,6 @@ class CubingBot(commands.Bot):
 
     def __init__(self):
         super().__init__(command_prefix=".", intents=intents)
-
         @self.command()
         async def hi(ctx):
             await ctx.channel.send(f"Hi {ctx.author.display_name}!")
@@ -28,6 +27,7 @@ class CubingBot(commands.Bot):
         await member.dm_channel.send(
             f'Hi {member.name}, welcome to the Cubing Place!'
         )
+    
 
 
 bot = CubingBot()
