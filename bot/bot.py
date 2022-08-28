@@ -1,8 +1,7 @@
-import discord 
-import dotenv 
-import os    
-
 from discord.ext import commands 
+import discord
+import os
+import dotenv
 
 dotenv.load_dotenv()
 TOKEN = os.getenv("DISCORD_TOKEN")
@@ -11,11 +10,25 @@ intents = discord.Intents.all()
 
 class CubingBot(commands.Bot):
 
-    def __init__(self):
-        super().__init__(command_prefix=".", intents=intents)
+    def init(self):
+        super().init(command_prefix=".", intents=intents)
+
         @self.command()
         async def hi(ctx):
             await ctx.channel.send(f"Hi {ctx.author.display_name}!")
+
+        @bot.command()
+        async def aon(ctx, *args, help='Calculates the aon of n solves'):
+            args = list(args)
+            for i, x in enumerate(args):
+                if str(x) == 'dnf':
+                    args[i] = np.inf
+                else:
+                    args[i] = float(x)
+            args.remove(max(args))
+            args.remove(min(args))
+            await ctx.channel.send(
+                f"{ctx.author.mention} has an ao{len(args)} of {np.mean(args)}")
 
     async def on_ready(self):
         print("--------------------------------------------------")
@@ -27,7 +40,6 @@ class CubingBot(commands.Bot):
         await member.dm_channel.send(
             f'Hi {member.name}, welcome to the Cubing Place!'
         )
-    
 
 
 bot = CubingBot()
