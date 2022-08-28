@@ -137,4 +137,4 @@ def perform(moves):
 #             move = np.random.choice(moves)
 #     return scramble 
 
-print(perform(["R'", "F", "R", "F"]))
+print(perform(["F"]))

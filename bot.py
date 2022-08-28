@@ -11,15 +11,14 @@ TOKEN = os.getenv("DISCORD_TOKEN")
 intents = discord.Intents.all()
 
 class CubingBot(commands.Bot):
-
     def __init__(self):
         super().__init__(command_prefix=".", intents=intents)
 
         @self.command()
         async def hi(ctx):
             await ctx.channel.send(f"Hi {ctx.author.display_name}!")
-            
-        @bot.command()
+
+        @self.command()
         async def aon(ctx, *args, help='Calculates the aon of n solves'):
             args = list(args)
             for i, x in enumerate(args):
@@ -31,7 +30,7 @@ class CubingBot(commands.Bot):
             args.remove(min(args))
             await ctx.channel.send(
                 f"{ctx.author.mention} has an ao{len(args)} of {np.mean(args)}")
-
+            
     async def on_ready(self):
         print("--------------------------------------------------")
         print(f"Logged in as {self.user} <{self.user.id}>")
